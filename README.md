@@ -59,7 +59,7 @@ The form on the left takes ear tag, type, breed, gender and date of birth. "Phot
 ![Registering an animal](docs/screenshots/03-register-animal.png)
 
 ### 4.4 Animal list
-Registered animals appear in the grid with a search box above it and a running total. The selected animal is summarised at the bottom left.
+Registered animals can published on Market where someone can know that's Livestock is Forsale. Until now farmer as owner of livestock is only one to see that list of forsale livestock but for future (Web app) it will be visible for everyone access to platform
 
 ![Animal list](docs/screenshots/06-animals-list.png)
 
