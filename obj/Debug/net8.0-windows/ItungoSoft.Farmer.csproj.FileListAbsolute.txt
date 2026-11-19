@@ -76,3 +76,7 @@ C:\Users\user\OneDrive\Desktop\Dot NET\Itungosoft\ItungoSoft.Farmer\obj\Debug\ne
 C:\Users\user\OneDrive\Desktop\Dot NET\Itungosoft\ItungoSoft.Farmer\obj\Debug\net8.0-windows\ItungoSoft.Farmer.pdb
 C:\Users\user\OneDrive\Desktop\Dot NET\Itungosoft\ItungoSoft.Farmer\obj\Debug\net8.0-windows\ItungoSoft.Farmer.genruntimeconfig.cache
 C:\Users\user\OneDrive\Desktop\Dot NET\Itungosoft\ItungoSoft.Farmer\obj\Debug\net8.0-windows\ref\ItungoSoft.Farmer.dll
+C:\Users\user\OneDrive\Desktop\Dot NET\Itungosoft\ItungoSoft.Farmer\obj\Debug\net8.0-windows\Themes\AppTheme.baml
+C:\Users\user\OneDrive\Desktop\Dot NET\Itungosoft\ItungoSoft.Farmer\obj\Debug\net8.0-windows\Themes\Colors.Light.baml
+C:\Users\user\OneDrive\Desktop\Dot NET\Itungosoft\ItungoSoft.Farmer\obj\Debug\net8.0-windows\App.baml
+C:\Users\user\OneDrive\Desktop\Dot NET\Itungosoft\ItungoSoft.Farmer\obj\Debug\net8.0-windows\ItungoSoft.Farmer.sourcelink.json

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ItungoSoft.Farmer")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+23f569c67b69ad616e885951cafe3b36098187cb")]
 [assembly: System.Reflection.AssemblyProductAttribute("ItungoSoft.Farmer")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ItungoSoft.Farmer")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
