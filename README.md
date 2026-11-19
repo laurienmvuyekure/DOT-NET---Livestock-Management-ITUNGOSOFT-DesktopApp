@@ -2,8 +2,9 @@
 
 A .NET desktop application that helps individual livestock farmers in Rwanda replace paper record-keeping with a digital, offline-first system. It covers animal registration, health and vaccination tracking, breeding management, veterinary consultation requests, livestock listings, reminders, reports and data backup.
 
-**Author:** Laurien MVUYEKURE - Software Engineering, Adventist University of Central Africa (AUCA)
-**Course:** .NET programming
+**STUDENT:** Laurien MVUYEKURE (28319) - Software Engineering, Adventist University of Central Africa (AUCA)
+
+**Course:** .NET 
 
 ---
 
