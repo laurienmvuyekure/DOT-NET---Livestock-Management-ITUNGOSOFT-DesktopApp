@@ -1,0 +1,81 @@
+<UserControl x:Class="ItungoSoft.Farmer.Views.ProfileView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <Grid Margin="24,14,24,24" DataContext="{Binding Extras}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Header -->
+            <TextBlock Grid.Row="0" Text="Farmer Account Profile &amp; Security"
+                       FontSize="18" FontWeight="Bold" Foreground="{DynamicResource TextPrimary}"
+                       Margin="0,0,0,16"/>
+
+            <!-- 2 Profile Cards in a Grid -->
+            <Grid Grid.Row="1" MaxWidth="720" HorizontalAlignment="Left">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Card 1: Profile Information -->
+                <Border Grid.Row="0" Margin="0,0,0,20" Padding="24" CornerRadius="16"
+                        Background="{DynamicResource Surface}"
+                        BorderBrush="{DynamicResource BorderSubtle}" BorderThickness="1">
+                    <StackPanel>
+                        <TextBlock Text="Farmer Profile Details" FontSize="15" FontWeight="Bold"
+                                   Foreground="{DynamicResource TextPrimary}" Margin="0,0,0,14"/>
+
+                        <TextBlock Text="Full Name *" FontSize="12" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,4"/>
+                        <TextBox Text="{Binding FullName}" Margin="0,0,0,14"/>
+
+                        <TextBlock Text="Username *" FontSize="12" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,4"/>
+                        <TextBox Text="{Binding Username}" Margin="0,0,0,18"/>
+
+                        <Button Content="Save Profile Information"
+                                Command="{Binding SaveProfileCommand}"
+                                Style="{StaticResource AccentButton}"
+                                HorizontalAlignment="Left" Padding="20,10"/>
+
+                        <TextBlock Text="{Binding Message}" Foreground="{DynamicResource Accent}"
+                                   FontSize="12" FontWeight="SemiBold" Margin="0,10,0,0" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Card 2: Security & Password Change -->
+                <Border Grid.Row="1" Padding="24" CornerRadius="16"
+                        Background="{DynamicResource Surface}"
+                        BorderBrush="{DynamicResource BorderSubtle}" BorderThickness="1">
+                    <StackPanel>
+                        <TextBlock Text="Change Password" FontSize="15" FontWeight="Bold"
+                                   Foreground="{DynamicResource TextPrimary}" Margin="0,0,0,6"/>
+                        <TextBlock Text="Ensure your new password contains at least 6 characters."
+                                   FontSize="12" Foreground="{DynamicResource TextMuted}" Margin="0,0,0,14"/>
+
+                        <TextBlock Text="Current Password *" FontSize="12" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,4"/>
+                        <PasswordBox x:Name="OldPw" Margin="0,0,0,14"/>
+
+                        <TextBlock Text="New Password (6+ characters) *" FontSize="12" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,4"/>
+                        <PasswordBox x:Name="NewPw" Margin="0,0,0,18"/>
+
+                        <Button Content="Update Password"
+                                Click="ChangePassword_Click"
+                                Style="{StaticResource PillButton}"
+                                HorizontalAlignment="Left" Padding="20,10"/>
+
+                        <TextBlock x:Name="PwMsg" Foreground="{DynamicResource Accent}"
+                                   FontSize="12" FontWeight="SemiBold" Margin="0,10,0,0" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Border>
+
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

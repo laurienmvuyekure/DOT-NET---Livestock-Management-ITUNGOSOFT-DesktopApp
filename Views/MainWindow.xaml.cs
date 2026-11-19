@@ -1,59 +1,78 @@
 using System.Windows;
-using ItungoSoft.Farmer.Services;
+using System.Windows.Input;
 using ItungoSoft.Farmer.ViewModels;
 
 namespace ItungoSoft.Farmer.Views;
 
+/// <summary>
+/// Interaction logic for MainWindow.xaml. Handles window chrome buttons,
+/// global accessibility keyboard shortcuts (Ctrl+F, Ctrl+1..9, Ctrl+T),
+/// logout delegation, and chart refresh triggers.
+/// </summary>
 public partial class MainWindow : Window
 {
-    ChartData? _data;
+    private readonly MainViewModel _viewModel;
 
     public MainWindow()
     {
         InitializeComponent();
-        Welcome.Text = $"Welcome, {AuthService.Current!.FullName}";
-        var vm = new MainViewModel();
-        DataContext = vm;
 
-        // Reload lists, reminders, dashboard and charts whenever the user switches tab
-        Tabs.SelectionChanged += (s, e) =>
+        _viewModel = new MainViewModel();
+        DataContext = _viewModel;
+
+        // Logout Event: returns user to LoginWindow
+        _viewModel.RequestLogout += () =>
         {
-            if (e.Source == Tabs)
+            new LoginWindow().Show();
+            Close();
+        };
+
+        // Redraw charts when returning to Dashboard
+        _viewModel.ActiveSectionChanged += section =>
+        {
+            if (section == "Dashboard")
             {
-                vm.Farm.Refresh();
-                vm.Extras.Refresh();
-                if (Tabs.SelectedIndex == 0) ReloadCharts();
+                DashboardPane.ReloadCharts();
             }
         };
 
-        foreach (var cv in new[] { BarCanvas, PivotCanvas, TrendCanvas, HistCanvas })
-            cv.SizeChanged += (_, _) => DrawCharts();
-        Loaded += (_, _) => ReloadCharts();
+        PreviewKeyDown += MainWindow_PreviewKeyDown;
+
+        if (SystemParameters.HighContrast)
+        {
+            ApplyHighContrastAdjustments();
+        }
     }
 
-    void ReloadCharts() { _data = ChartService.Load(); DrawCharts(); }
-
-    void DrawCharts()
+    private void MainWindow_PreviewKeyDown(object sender, KeyEventArgs e)
     {
-        if (_data == null) return;
-        var d = _data;
-        ChartDrawer.Bars(BarCanvas, "Animals by type", d.TypeLabels, new[] { d.TypeCounts }, new[] { "Animals" });
-        ChartDrawer.Bars(PivotCanvas, "Pivot: type x gender", d.TypeLabels, new[] { d.Male, d.Female }, new[] { "Male", "Female" });
-        ChartDrawer.Trend(TrendCanvas, "Health records per month", d.MonthLabels, d.MonthCounts);
-        ChartDrawer.Bars(HistCanvas, "Histogram: age (months)", d.AgeLabels, new[] { d.AgeCounts }, new[] { "Animals" }, gapless: true);
+        // Ctrl + F focuses the global search input
+        if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.F)
+        {
+            TopBar.FocusSearch();
+            e.Handled = true;
+        }
     }
 
-    void ChangePassword_Click(object s, RoutedEventArgs e)
+    private void Minimize_Click(object sender, RoutedEventArgs e)
     {
-        var err = AuthService.ChangePassword(OldPw.Password, NewPw.Password);
-        PwMsg.Text = err ?? "Password changed.";
-        if (err == null) { OldPw.Clear(); NewPw.Clear(); }
+        WindowState = WindowState.Minimized;
     }
 
-    void Logout_Click(object s, RoutedEventArgs e)
+    private void Maximize_Click(object sender, RoutedEventArgs e)
     {
-        AuthService.Logout();
-        new LoginWindow().Show();
+        WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
+    }
+
+    private void Close_Click(object sender, RoutedEventArgs e)
+    {
         Close();
+    }
+
+    private void ApplyHighContrastAdjustments()
+    {
+        Resources["Border"] = SystemColors.WindowFrameBrush;
+        Resources["TextPrimary"] = SystemColors.WindowTextBrush;
+        Resources["Background"] = SystemColors.WindowBrush;
     }
 }

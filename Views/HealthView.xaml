@@ -1,0 +1,116 @@
+<UserControl x:Class="ItungoSoft.Farmer.Views.HealthView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Grid Margin="24,14,24,24" DataContext="{Binding Farm}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="320"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Left Column: Health Event / Vaccination Form Card -->
+        <Border Grid.Column="0" Margin="0,0,16,0"
+                Background="{DynamicResource Surface}"
+                BorderBrush="{DynamicResource BorderSubtle}"
+                BorderThickness="1" CornerRadius="16" Padding="20">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                <StackPanel>
+                    <TextBlock Text="Record / Schedule Health Event"
+                               FontSize="16" FontWeight="Bold"
+                               Foreground="{DynamicResource TextPrimary}"
+                               Margin="0,0,0,14"/>
+
+                    <!-- Animal Selector (also filters the list) -->
+                    <TextBlock Text="Animal (Filters list) *" FontSize="12" FontWeight="SemiBold"
+                               Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,4"/>
+                    <ComboBox ItemsSource="{Binding AnimalList}"
+                              DisplayMemberPath="EarTag"
+                              SelectedItem="{Binding HealthAnimal}"
+                              Padding="8,6" Margin="0,0,0,6"/>
+
+                    <Button Content="Show All Animals"
+                            Command="{Binding ClearFilterCommand}"
+                            Style="{StaticResource PillButton}"
+                            HorizontalAlignment="Left"
+                            Padding="12,4" Margin="0,0,0,12"/>
+
+                    <!-- Event Kind -->
+                    <TextBlock Text="Health Event Type *" FontSize="12" FontWeight="SemiBold"
+                               Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,4"/>
+                    <ComboBox ItemsSource="{Binding HealthKinds}"
+                              SelectedItem="{Binding Kind}"
+                              Padding="8,6" Margin="0,0,0,12"/>
+
+                    <!-- Description -->
+                    <TextBlock Text="Description / Notes *" FontSize="12" FontWeight="SemiBold"
+                               Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,4"/>
+                    <TextBox Text="{Binding Description}"
+                             Margin="0,0,0,12"/>
+
+                    <!-- Date -->
+                    <TextBlock Text="Date (Done or Scheduled) *" FontSize="12" FontWeight="SemiBold"
+                               Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,4"/>
+                    <DatePicker SelectedDate="{Binding HealthDate}" Margin="0,0,0,14"/>
+
+                    <!-- Done Checkbox -->
+                    <CheckBox Content="Already Completed (untick to schedule)"
+                              IsChecked="{Binding Done}"
+                              Foreground="{DynamicResource TextPrimary}"
+                              Margin="0,0,0,16"/>
+
+                    <!-- Save Health Record Button -->
+                    <Button Content="Save Health Record"
+                            Command="{Binding AddHealthCommand}"
+                            Style="{StaticResource AccentButton}"
+                            HorizontalAlignment="Stretch"
+                            Padding="0,10" Margin="0,0,0,12"/>
+
+                    <!-- Message -->
+                    <TextBlock Text="{Binding Message}" Foreground="{DynamicResource Accent}"
+                               TextWrapping="Wrap" FontSize="12" FontWeight="SemiBold"/>
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+
+        <!-- Right Column: Health Events DataGrid Card -->
+        <Border Grid.Column="1"
+                Background="{DynamicResource Surface}"
+                BorderBrush="{DynamicResource BorderSubtle}"
+                BorderThickness="1" CornerRadius="16" Padding="20">
+            <DockPanel>
+
+                <!-- Top Bar: Action Buttons -->
+                <DockPanel DockPanel.Dock="Top" Margin="0,0,0,16">
+                    <StackPanel Orientation="Horizontal">
+                        <Button Content="Mark Completed"
+                                Command="{Binding MarkDoneCommand}"
+                                Style="{StaticResource AccentButton}"
+                                Padding="14,6" Margin="0,0,8,0"/>
+                        <Button Content="Delete Selected"
+                                Command="{Binding DeleteHealthCommand}"
+                                Style="{StaticResource DangerButton}"
+                                Padding="14,6"/>
+                    </StackPanel>
+                </DockPanel>
+
+                <!-- DataGrid -->
+                <DataGrid ItemsSource="{Binding Health}"
+                          SelectedItem="{Binding SelectedHealth}"
+                          AutoGenerateColumns="False"
+                          IsReadOnly="True"
+                          SelectionMode="Single"
+                          CanUserAddRows="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Animal" Binding="{Binding Animal.EarTag}" Width="*"/>
+                        <DataGridTextColumn Header="Event Type" Binding="{Binding Kind}" Width="*"/>
+                        <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="2*"/>
+                        <DataGridTextColumn Header="Date" Binding="{Binding Date, StringFormat=dd/MM/yyyy}" Width="*"/>
+                        <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+            </DockPanel>
+        </Border>
+
+    </Grid>
+</UserControl>

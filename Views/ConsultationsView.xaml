@@ -1,0 +1,101 @@
+<UserControl x:Class="ItungoSoft.Farmer.Views.ConsultationsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Grid Margin="24,14,24,24" DataContext="{Binding Extras}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="340"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Left Column: Request Form & Response Card -->
+        <Border Grid.Column="0" Margin="0,0,16,0"
+                Background="{DynamicResource Surface}"
+                BorderBrush="{DynamicResource BorderSubtle}"
+                BorderThickness="1" CornerRadius="16" Padding="20">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                <StackPanel>
+                    <TextBlock Text="Veterinary Tele-Consultation"
+                               FontSize="16" FontWeight="Bold"
+                               Foreground="{DynamicResource TextPrimary}"
+                               Margin="0,0,0,14"/>
+
+                    <!-- Animal -->
+                    <TextBlock Text="Animal *" FontSize="12" FontWeight="SemiBold"
+                               Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,4"/>
+                    <ComboBox ItemsSource="{Binding AnimalList}"
+                              DisplayMemberPath="EarTag"
+                              SelectedItem="{Binding ConsAnimal}"
+                              Padding="8,6" Margin="0,0,0,12"/>
+
+                    <!-- Subject -->
+                    <TextBlock Text="Subject / Symptoms *" FontSize="12" FontWeight="SemiBold"
+                               Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,4"/>
+                    <TextBox Text="{Binding Subject}" Margin="0,0,0,12"/>
+
+                    <!-- Description -->
+                    <TextBlock Text="Clinical Description *" FontSize="12" FontWeight="SemiBold"
+                               Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,4"/>
+                    <TextBox Text="{Binding ConsDescription}" Height="70"
+                             TextWrapping="Wrap" AcceptsReturn="True" Margin="0,0,0,14"/>
+
+                    <!-- Submit Button -->
+                    <Button Content="Submit Request"
+                            Command="{Binding AddConsultationCommand}"
+                            Style="{StaticResource AccentButton}"
+                            HorizontalAlignment="Stretch"
+                            Padding="0,10" Margin="0,0,0,16"/>
+
+                    <Separator Background="{DynamicResource BorderSubtle}" Margin="0,0,0,14"/>
+
+                    <!-- Vet Response Section -->
+                    <TextBlock Text="Veterinary Response" FontSize="14" FontWeight="Bold"
+                               Foreground="{DynamicResource TextPrimary}" Margin="0,0,0,4"/>
+                    <TextBlock Text="Select a row from the table first" FontSize="11"
+                               Foreground="{DynamicResource TextMuted}" Margin="0,0,0,8"/>
+
+                    <TextBox Text="{Binding Response}" Height="70"
+                             TextWrapping="Wrap" AcceptsReturn="True" Margin="0,0,0,10"/>
+
+                    <Button Content="Save Response"
+                            Command="{Binding SaveResponseCommand}"
+                            Style="{StaticResource PillButton}"
+                            HorizontalAlignment="Stretch"
+                            Padding="0,8" Margin="0,0,0,12"/>
+
+                    <!-- Status Message -->
+                    <TextBlock Text="{Binding Message}" Foreground="{DynamicResource Accent}"
+                               TextWrapping="Wrap" FontSize="12" FontWeight="SemiBold"/>
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+
+        <!-- Right Column: Consultations DataGrid Card -->
+        <Border Grid.Column="1"
+                Background="{DynamicResource Surface}"
+                BorderBrush="{DynamicResource BorderSubtle}"
+                BorderThickness="1" CornerRadius="16" Padding="20">
+            <DockPanel>
+                <TextBlock DockPanel.Dock="Top" Text="Consultation Inquiries &amp; Doctor Notes"
+                           FontSize="15" FontWeight="Bold" Foreground="{DynamicResource TextPrimary}"
+                           Margin="0,0,0,16"/>
+
+                <DataGrid ItemsSource="{Binding Consultations}"
+                          SelectedItem="{Binding SelectedConsultation}"
+                          AutoGenerateColumns="False"
+                          IsReadOnly="True"
+                          SelectionMode="Single"
+                          CanUserAddRows="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Date" Binding="{Binding CreatedAt, StringFormat=dd/MM/yyyy}" Width="*"/>
+                        <DataGridTextColumn Header="Animal" Binding="{Binding AnimalTag}" Width="*"/>
+                        <DataGridTextColumn Header="Subject" Binding="{Binding Subject}" Width="1.5*"/>
+                        <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="2*"/>
+                        <DataGridTextColumn Header="Response" Binding="{Binding Response}" Width="2*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </DockPanel>
+        </Border>
+
+    </Grid>
+</UserControl>

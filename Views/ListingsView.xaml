@@ -1,0 +1,96 @@
+<UserControl x:Class="ItungoSoft.Farmer.Views.ListingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Grid Margin="24,14,24,24" DataContext="{Binding Extras}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="320"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Left Column: Create Listing Form Card -->
+        <Border Grid.Column="0" Margin="0,0,16,0"
+                Background="{DynamicResource Surface}"
+                BorderBrush="{DynamicResource BorderSubtle}"
+                BorderThickness="1" CornerRadius="16" Padding="20">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                <StackPanel>
+                    <TextBlock Text="Marketplace Listing"
+                               FontSize="16" FontWeight="Bold"
+                               Foreground="{DynamicResource TextPrimary}"
+                               Margin="0,0,0,14"/>
+
+                    <!-- Animal -->
+                    <TextBlock Text="Animal for Sale *" FontSize="12" FontWeight="SemiBold"
+                               Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,4"/>
+                    <ComboBox ItemsSource="{Binding AnimalList}"
+                              DisplayMemberPath="EarTag"
+                              SelectedItem="{Binding ListAnimal}"
+                              Padding="8,6" Margin="0,0,0,12"/>
+
+                    <!-- Price (RWF) -->
+                    <TextBlock Text="Price (RWF) *" FontSize="12" FontWeight="SemiBold"
+                               Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,4"/>
+                    <TextBox Text="{Binding Price}" Margin="0,0,0,12"/>
+
+                    <!-- Description -->
+                    <TextBlock Text="Listing Description *" FontSize="12" FontWeight="SemiBold"
+                               Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,4"/>
+                    <TextBox Text="{Binding ListDescription}" Height="70"
+                             TextWrapping="Wrap" AcceptsReturn="True" Margin="0,0,0,16"/>
+
+                    <!-- Create Listing Button -->
+                    <Button Content="Create Marketplace Listing"
+                            Command="{Binding AddListingCommand}"
+                            Style="{StaticResource AccentButton}"
+                            HorizontalAlignment="Stretch"
+                            Padding="0,10" Margin="0,0,0,14"/>
+
+                    <!-- Status Message -->
+                    <TextBlock Text="{Binding Message}" Foreground="{DynamicResource Accent}"
+                               TextWrapping="Wrap" FontSize="12" FontWeight="SemiBold"/>
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+
+        <!-- Right Column: Listings DataGrid Card -->
+        <Border Grid.Column="1"
+                Background="{DynamicResource Surface}"
+                BorderBrush="{DynamicResource BorderSubtle}"
+                BorderThickness="1" CornerRadius="16" Padding="20">
+            <DockPanel>
+
+                <!-- Top Bar: Action Buttons -->
+                <DockPanel DockPanel.Dock="Top" Margin="0,0,0,16">
+                    <StackPanel Orientation="Horizontal">
+                        <Button Content="Toggle Active / Inactive"
+                                Command="{Binding ToggleListingCommand}"
+                                Style="{StaticResource PillButton}"
+                                Padding="14,6" Margin="0,0,8,0"/>
+                        <Button Content="Delete Selected"
+                                Command="{Binding DeleteListingCommand}"
+                                Style="{StaticResource DangerButton}"
+                                Padding="14,6"/>
+                    </StackPanel>
+                </DockPanel>
+
+                <!-- DataGrid -->
+                <DataGrid ItemsSource="{Binding Listings}"
+                          SelectedItem="{Binding SelectedListing}"
+                          AutoGenerateColumns="False"
+                          IsReadOnly="True"
+                          SelectionMode="Single"
+                          CanUserAddRows="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Animal" Binding="{Binding AnimalTag}" Width="*"/>
+                        <DataGridTextColumn Header="Price (RWF)" Binding="{Binding Price, StringFormat=N0}" Width="*"/>
+                        <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="2*"/>
+                        <DataGridCheckBoxColumn Header="Active Status" Binding="{Binding Active}" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+            </DockPanel>
+        </Border>
+
+    </Grid>
+</UserControl>

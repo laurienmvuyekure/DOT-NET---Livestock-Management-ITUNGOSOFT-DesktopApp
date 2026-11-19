@@ -1,0 +1,135 @@
+<UserControl x:Class="ItungoSoft.Farmer.Views.StatsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Grid Margin="24,6,24,14">
+        <!-- Four Pastel Stat Cards in a Responsive UniformGrid (Bound to Live Farm Data) -->
+        <UniformGrid Rows="1" Columns="4">
+
+            <!-- Card 1: Total Animals (Blue Pastel) -->
+            <Border Margin="0,0,10,0" Padding="20,18" CornerRadius="14"
+                    BorderThickness="1" BorderBrush="{DynamicResource BorderSubtle}"
+                    Background="{DynamicResource CardBlue}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="{Binding Farm.TotalAnimals}"
+                                   FontSize="28" FontWeight="Bold"
+                                   Foreground="{DynamicResource TextPrimary}"
+                                   Margin="0,0,0,4"/>
+                        <TextBlock Text="Total Animals"
+                                   FontSize="13" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource CardBlueText}"/>
+                    </StackPanel>
+
+                    <!-- Livestock / Cow Icon -->
+                    <Border Grid.Column="1" Width="38" Height="38" CornerRadius="10"
+                            Background="{DynamicResource SurfaceSecondary}"
+                            BorderBrush="{DynamicResource BorderSubtle}" BorderThickness="1"
+                            VerticalAlignment="Top" HorizontalAlignment="Right">
+                        <Path Width="18" Height="18" Stretch="Uniform" Fill="{DynamicResource CardBlueText}"
+                              Data="M19 13C19 14.1 18.1 15 17 15H15V19H13V15H11V19H9V15H7C5.9 15 5 14.1 5 13V9C5 7.9 5.9 7 7 7H17C18.1 7 19 7.9 19 9V13M7 9V13H17V9H7M5 4L2 7H4V13H2V15H4V19H2V21H7V19H5V15H7V13H5V7H7L5 4M19 4L17 7H19V13H17V15H19V19H17V21H22V19H20V15H22V13H20V7H22L19 4Z"/>
+                    </Border>
+                </Grid>
+            </Border>
+
+            <!-- Card 2: Upcoming Vaccinations (Green Pastel) -->
+            <Border Margin="5,0,5,0" Padding="20,18" CornerRadius="14"
+                    BorderThickness="1" BorderBrush="{DynamicResource BorderSubtle}"
+                    Background="{DynamicResource CardGreen}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="{Binding Farm.UpcomingVaccinations}"
+                                   FontSize="28" FontWeight="Bold"
+                                   Foreground="{DynamicResource TextPrimary}"
+                                   Margin="0,0,0,4"/>
+                        <TextBlock Text="Upcoming Vaccinations"
+                                   FontSize="13" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource CardGreenText}"/>
+                    </StackPanel>
+
+                    <!-- Medical Cross / Health Icon -->
+                    <Border Grid.Column="1" Width="38" Height="38" CornerRadius="10"
+                            Background="{DynamicResource SurfaceSecondary}"
+                            BorderBrush="{DynamicResource BorderSubtle}" BorderThickness="1"
+                            VerticalAlignment="Top" HorizontalAlignment="Right">
+                        <Path Width="18" Height="18" Stretch="Uniform" Fill="{DynamicResource CardGreenText}"
+                              Data="M19 10.5H13.5V5H10.5V10.5H5V13.5H10.5V19H13.5V13.5H19V10.5Z"/>
+                    </Border>
+                </Grid>
+            </Border>
+
+            <!-- Card 3: Pending Consultations (Yellow Pastel) -->
+            <Border Margin="5,0,5,0" Padding="20,18" CornerRadius="14"
+                    BorderThickness="1" BorderBrush="{DynamicResource BorderSubtle}"
+                    Background="{DynamicResource CardYellow}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="{Binding Farm.PendingConsultations}"
+                                   FontSize="28" FontWeight="Bold"
+                                   Foreground="{DynamicResource TextPrimary}"
+                                   Margin="0,0,0,4"/>
+                        <TextBlock Text="Pending Consultations"
+                                   FontSize="13" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource CardYellowText}"/>
+                    </StackPanel>
+
+                    <!-- Consultation / Chat Icon -->
+                    <Border Grid.Column="1" Width="38" Height="38" CornerRadius="10"
+                            Background="{DynamicResource SurfaceSecondary}"
+                            BorderBrush="{DynamicResource BorderSubtle}" BorderThickness="1"
+                            VerticalAlignment="Top" HorizontalAlignment="Right">
+                        <Path Width="18" Height="18" Stretch="Uniform" Fill="{DynamicResource CardYellowText}"
+                              Data="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2M20 16H6L4 18V4H20V16Z"/>
+                    </Border>
+                </Grid>
+            </Border>
+
+            <!-- Card 4: Active Listings (Lavender Pastel) -->
+            <Border Margin="10,0,0,0" Padding="20,18" CornerRadius="14"
+                    BorderThickness="1" BorderBrush="{DynamicResource BorderSubtle}"
+                    Background="{DynamicResource CardLavender}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="{Binding Farm.ActiveListings}"
+                                   FontSize="28" FontWeight="Bold"
+                                   Foreground="{DynamicResource TextPrimary}"
+                                   Margin="0,0,0,4"/>
+                        <TextBlock Text="Active Listings"
+                                   FontSize="13" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource CardLavenderText}"/>
+                    </StackPanel>
+
+                    <!-- Price Tag / Market Icon -->
+                    <Border Grid.Column="1" Width="38" Height="38" CornerRadius="10"
+                            Background="{DynamicResource SurfaceSecondary}"
+                            BorderBrush="{DynamicResource BorderSubtle}" BorderThickness="1"
+                            VerticalAlignment="Top" HorizontalAlignment="Right">
+                        <Path Width="18" Height="18" Stretch="Uniform" Fill="{DynamicResource CardLavenderText}"
+                              Data="M21.41 11.58L12.41 2.58C12.05 2.22 11.55 2 11 2H4C2.9 2 2 2.9 2 4V11C2 11.55 2.22 12.05 2.59 12.42L11.59 21.42C11.95 21.78 12.45 22 13 22C13.55 22 14.05 21.78 14.41 21.41L21.41 14.41C21.78 14.05 22 13.55 22 13C22 12.45 21.77 11.94 21.41 11.58M5.5 7C4.67 7 4 6.33 4 5.5C4 4.67 4.67 4 5.5 4C6.33 4 7 4.67 7 5.5C7 6.33 6.33 7 5.5 7Z"/>
+                    </Border>
+                </Grid>
+            </Border>
+
+        </UniformGrid>
+    </Grid>
+</UserControl>

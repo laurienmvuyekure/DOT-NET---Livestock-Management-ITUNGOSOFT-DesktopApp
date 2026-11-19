@@ -8,13 +8,6 @@ using ItungoSoft.Farmer.Services;
 
 namespace ItungoSoft.Farmer.ViewModels;
 
-public class MainViewModel
-{
-    public AnimalsViewModel Animals { get; } = new();
-    public FarmViewModel Farm { get; } = new();
-    public ExtrasViewModel Extras { get; } = new();
-}
-
 public partial class FarmViewModel : ObservableObject
 {
     public ObservableCollection<Animal> AnimalList { get; } = new();

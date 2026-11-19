@@ -1,0 +1,132 @@
+<UserControl x:Class="ItungoSoft.Farmer.Views.ReportsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <Grid Margin="24,14,24,24" DataContext="{Binding Extras}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Header -->
+            <TextBlock Grid.Row="0" Text="Reports, Data Export &amp; Backups"
+                       FontSize="18" FontWeight="Bold" Foreground="{DynamicResource TextPrimary}"
+                       Margin="0,0,0,16"/>
+
+            <!-- 3 Cards in a Responsive UniformGrid -->
+            <UniformGrid Grid.Row="1" Rows="1" Columns="3" Margin="0,0,0,20">
+
+                <!-- Card 1: Official PDF Reports -->
+                <Border Margin="0,0,10,0" Padding="20" CornerRadius="16"
+                        Background="{DynamicResource Surface}"
+                        BorderBrush="{DynamicResource BorderSubtle}" BorderThickness="1">
+                    <StackPanel>
+                        <!-- Icon + Title -->
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,14">
+                            <Border Width="36" Height="36" CornerRadius="10"
+                                    Background="{DynamicResource CardBlue}" Margin="0,0,10,0">
+                                <Path Width="16" Height="16" Stretch="Uniform" Fill="{DynamicResource CardBlueText}"
+                                      Data="M14 2H6A2 2 0 0 0 4 4V20A2 2 0 0 0 6 22H18A2 2 0 0 0 20 20V8L14 2M13 3.5L18.5 9H13V3.5Z"/>
+                            </Border>
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock Text="PDF Audits &amp; Reports" FontSize="14" FontWeight="Bold" Foreground="{DynamicResource TextPrimary}"/>
+                                <TextBlock Text="QuestPDF exports" FontSize="11" Foreground="{DynamicResource TextMuted}"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <TextBlock Text="Generate printable PDF documents for veterinary reviews and cooperative census."
+                                   FontSize="12" Foreground="{DynamicResource TextSecondary}" TextWrapping="Wrap" Margin="0,0,0,16"/>
+
+                        <Button Content="Animal Population Report (PDF)"
+                                Command="{Binding PopulationPdfCommand}"
+                                Style="{StaticResource PillButton}"
+                                HorizontalAlignment="Stretch" Padding="10,8" Margin="0,0,0,10"/>
+
+                        <Button Content="Health Summary Report (PDF)"
+                                Command="{Binding HealthPdfCommand}"
+                                Style="{StaticResource PillButton}"
+                                HorizontalAlignment="Stretch" Padding="10,8" Margin="0,0,0,10"/>
+
+                        <Button Content="Breeding Performance Report (PDF)"
+                                Command="{Binding BreedingPdfCommand}"
+                                Style="{StaticResource PillButton}"
+                                HorizontalAlignment="Stretch" Padding="10,8"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Card 2: CSV Data Export -->
+                <Border Margin="5,0,5,0" Padding="20" CornerRadius="16"
+                        Background="{DynamicResource Surface}"
+                        BorderBrush="{DynamicResource BorderSubtle}" BorderThickness="1">
+                    <StackPanel>
+                        <!-- Icon + Title -->
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,14">
+                            <Border Width="36" Height="36" CornerRadius="10"
+                                    Background="{DynamicResource CardGreen}" Margin="0,0,10,0">
+                                <Path Width="16" Height="16" Stretch="Uniform" Fill="{DynamicResource CardGreenText}"
+                                      Data="M5 20H19V18H5M19 9H15V3H9V9H5L12 16L19 9Z"/>
+                            </Border>
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock Text="Spreadsheet Export" FontSize="14" FontWeight="Bold" Foreground="{DynamicResource TextPrimary}"/>
+                                <TextBlock Text="Universal CSV format" FontSize="11" Foreground="{DynamicResource TextMuted}"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <TextBlock Text="Export raw animal records, vaccination schedules, and health treatments into CSV for Excel."
+                                   FontSize="12" Foreground="{DynamicResource TextSecondary}" TextWrapping="Wrap" Margin="0,0,0,16"/>
+
+                        <Button Content="Export Animals &amp; Health Data (CSV)"
+                                Command="{Binding ExportCsvCommand}"
+                                Style="{StaticResource AccentButton}"
+                                HorizontalAlignment="Stretch" Padding="10,10"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Card 3: PostgreSQL Database Backup & Restore -->
+                <Border Margin="10,0,0,0" Padding="20" CornerRadius="16"
+                        Background="{DynamicResource Surface}"
+                        BorderBrush="{DynamicResource BorderSubtle}" BorderThickness="1">
+                    <StackPanel>
+                        <!-- Icon + Title -->
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,14">
+                            <Border Width="36" Height="36" CornerRadius="10"
+                                    Background="{DynamicResource CardLavender}" Margin="0,0,10,0">
+                                <Path Width="16" Height="16" Stretch="Uniform" Fill="{DynamicResource CardLavenderText}"
+                                      Data="M12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2M12 4C16.4 4 20 7.6 20 12C20 16.4 16.4 20 12 20C7.6 20 4 16.4 4 12C4 7.6 7.6 4 12 4M12 6V11.2L15.6 14.8L14.2 16.2L10 12V6H12Z"/>
+                            </Border>
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock Text="Database Backup" FontSize="14" FontWeight="Bold" Foreground="{DynamicResource TextPrimary}"/>
+                                <TextBlock Text="Safety &amp; recovery" FontSize="11" Foreground="{DynamicResource TextMuted}"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <TextBlock Text="Safeguard your entire offline farm registry. Create disaster recovery archives and restore anytime."
+                                   FontSize="12" Foreground="{DynamicResource TextSecondary}" TextWrapping="Wrap" Margin="0,0,0,16"/>
+
+                        <Button Content="Backup PostgreSQL Database"
+                                Command="{Binding BackupCommand}"
+                                Style="{StaticResource PillButton}"
+                                HorizontalAlignment="Stretch" Padding="10,8" Margin="0,0,0,10"/>
+
+                        <Button Content="Restore PostgreSQL Database"
+                                Command="{Binding RestoreCommand}"
+                                Style="{StaticResource PillButton}"
+                                HorizontalAlignment="Stretch" Padding="10,8"/>
+                    </StackPanel>
+                </Border>
+
+            </UniformGrid>
+
+            <!-- Bottom Status Notification -->
+            <Border Grid.Row="2" Background="{DynamicResource Surface}"
+                    BorderBrush="{DynamicResource BorderSubtle}" BorderThickness="1"
+                    CornerRadius="12" Padding="16,12">
+                <TextBlock Text="{Binding Message}" Foreground="{DynamicResource Accent}"
+                           FontSize="13" FontWeight="SemiBold" TextWrapping="Wrap"/>
+            </Border>
+
+        </Grid>
+    </ScrollViewer>
+</UserControl>

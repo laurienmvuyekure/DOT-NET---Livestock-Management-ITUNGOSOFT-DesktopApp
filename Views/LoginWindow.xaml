@@ -1,20 +1,92 @@
 <Window x:Class="ItungoSoft.Farmer.Views.LoginWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="ITUNGOSOFT - Farmer Login" Width="380" Height="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
-    <StackPanel Margin="24" VerticalAlignment="Center">
-        <TextBlock Text="ITUNGOSOFT" FontSize="26" FontWeight="Bold" Foreground="#2E7D32"/>
-        <TextBlock Text="Farmer Module" Margin="0,0,0,16" Foreground="Gray"/>
-        <TextBlock Text="Full name (registration only)"/>
-        <TextBox x:Name="NameBox" Margin="0,2,0,8"/>
-        <TextBlock Text="Username"/>
-        <TextBox x:Name="UserBox" Margin="0,2,0,8"/>
-        <TextBlock Text="Password"/>
-        <PasswordBox x:Name="PassBox" Margin="0,2,0,8"/>
-        <TextBlock x:Name="Msg" Foreground="Firebrick" TextWrapping="Wrap" Height="34"/>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Content="Register" Width="90" Margin="0,0,8,0" Click="Register_Click"/>
-            <Button Content="Log in" Width="90" IsDefault="True" Click="Login_Click"/>
+        Title="ITUNGOSOFT — Farmer Login"
+        Width="440"
+        SizeToContent="Height"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanMinimize"
+        Background="{DynamicResource Background}"
+        Foreground="{DynamicResource TextPrimary}"
+        FontFamily="Segoe UI Variable, Segoe UI, sans-serif">
+
+    <Border Padding="28,24" Background="{DynamicResource Background}">
+        <StackPanel>
+
+            <!-- Brand Header with Agricultural Shield Logo -->
+            <DockPanel Margin="0,0,0,18">
+                <Border Width="42" Height="42" CornerRadius="12"
+                        Background="{DynamicResource Accent}" Margin="0,0,14,0"
+                        VerticalAlignment="Center">
+                    <Path Width="22" Height="22" Stretch="Uniform" Fill="#FFFFFF"
+                          Data="M12 2L4 6V12C4 16.5 7.5 20.5 12 22C16.5 20.5 20 16.5 20 12V6L12 2M12 4.2L18 7.2V11.8C18 15.2 15.5 18.3 12 19.8C8.5 18.3 6 15.2 6 11.8V7.2L12 4.2M12 7A3 3 0 0 0 9 10C9 11.3 9.8 12.4 11 12.8V16H13V12.8C14.2 12.4 15 11.3 15 10A3 3 0 0 0 12 7Z"/>
+                </Border>
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Text="ITUNGOSOFT" FontSize="20" FontWeight="Bold" Foreground="{DynamicResource TextPrimary}"/>
+                    <TextBlock Text="Rwanda Livestock Farmer Portal" FontSize="12" Foreground="{DynamicResource TextMuted}"/>
+                </StackPanel>
+            </DockPanel>
+
+            <!-- Form Card Container -->
+            <Border Background="{DynamicResource Surface}"
+                    BorderBrush="{DynamicResource BorderSubtle}"
+                    BorderThickness="1" CornerRadius="14" Padding="20" Margin="0,0,0,14">
+                <StackPanel>
+
+                    <!-- Full Name (Registration only) -->
+                    <TextBlock Text="Full Name (for new accounts)"
+                               FontSize="12" FontWeight="SemiBold"
+                               Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,4"/>
+                    <TextBox x:Name="NameBox" Margin="0,0,0,12"
+                             ToolTip="Enter your full name if registering a new account"/>
+
+                    <!-- Username -->
+                    <TextBlock Text="Username *"
+                               FontSize="12" FontWeight="SemiBold"
+                               Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,4"/>
+                    <TextBox x:Name="UserBox" Margin="0,0,0,12"/>
+
+                    <!-- Password -->
+                    <TextBlock Text="Password *"
+                               FontSize="12" FontWeight="SemiBold"
+                               Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,4"/>
+                    <PasswordBox x:Name="PassBox" Margin="0,0,0,12"/>
+
+                    <!-- Validation Message -->
+                    <TextBlock x:Name="Msg" Foreground="{DynamicResource SignOutBg}"
+                               FontSize="12" FontWeight="SemiBold"
+                               TextWrapping="Wrap" MinHeight="18" Margin="0,0,0,6"/>
+
+                    <!-- Action Buttons -->
+                    <Grid Margin="0,6,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Register Button -->
+                        <Button Grid.Column="0" Content="Register"
+                                Style="{StaticResource PillButton}"
+                                Margin="0,0,6,0" Padding="0,9"
+                                Click="Register_Click"/>
+
+                        <!-- Login Button -->
+                        <Button Grid.Column="1" Content="Log In"
+                                Style="{StaticResource AccentButton}"
+                                Margin="6,0,0,0" Padding="0,9"
+                                IsDefault="True"
+                                Click="Login_Click"/>
+                    </Grid>
+
+                </StackPanel>
+            </Border>
+
+            <!-- Footer Caption -->
+            <TextBlock Text="Offline-First Secure Livestock Management System"
+                       FontSize="11" Foreground="{DynamicResource TextMuted}"
+                       HorizontalAlignment="Center"/>
+
         </StackPanel>
-    </StackPanel>
+    </Border>
+
 </Window>

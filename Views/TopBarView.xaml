@@ -1,0 +1,74 @@
+<UserControl x:Class="ItungoSoft.Farmer.Views.TopBarView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Height="56"
+             Background="Transparent">
+
+    <Grid Margin="24,10,24,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Search Input Field (Live Filter on Animals Registry) -->
+        <TextBox x:Name="SearchBox"
+                 Grid.Column="0"
+                 Style="{StaticResource SearchTextBoxStyle}"
+                 Text="{Binding Animals.SearchText, UpdateSourceTrigger=PropertyChanged}"
+                 AutomationProperties.Name="Search Animals Registry (Shortcut Ctrl+F)"
+                 AutomationProperties.HelpText="Searches registered animals by ear tag, breed, or species"/>
+
+        <!-- Right Action Pill & Notification Buttons -->
+        <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+
+            <!-- Pill Button: Quick Register Animal -->
+            <Button Style="{StaticResource PillButton}"
+                    Command="{Binding NavigateCommand}" CommandParameter="Animals"
+                    AutomationProperties.Name="Quick Register Animal"
+                    Margin="0,0,12,0">
+                <StackPanel Orientation="Horizontal">
+                    <Path Width="14" Height="14" Stretch="Uniform" Fill="{DynamicResource Accent}" Margin="0,0,8,0"
+                          Data="M19 13H13V19H11V13H5V11H11V5H13V11H19V13Z"/>
+                    <TextBlock Text="+ Register Animal" FontWeight="SemiBold" FontSize="12"/>
+                </StackPanel>
+            </Button>
+
+            <!-- Refresh Button -->
+            <Button Style="{StaticResource IconButton}"
+                    Command="{Binding NavigateCommand}" CommandParameter="{Binding ActiveSection}"
+                    AutomationProperties.Name="Refresh Data"
+                    AutomationProperties.HelpText="Refreshes live data from PostgreSQL database"
+                    Margin="0,0,6,0">
+                <Path Width="16" Height="16" Stretch="Uniform" Fill="{DynamicResource TextSecondary}"
+                      Data="M17.65 6.35C16.2 4.9 14.21 4 12 4C7.58 4 4.01 7.58 4.01 12C4.01 16.42 7.58 20 12 20C15.73 20 18.84 17.45 19.73 14H17.65C16.83 16.33 14.61 18 12 18C8.69 18 6 15.31 6 12C6 8.69 8.69 6 12 6C13.66 6 15.14 6.69 16.22 7.78L13 11H20V4L17.65 6.35Z"/>
+            </Button>
+
+            <!-- Notification Bell Icon Button with Unread Indicator -->
+            <Button Style="{StaticResource IconButton}"
+                    Command="{Binding NavigateCommand}" CommandParameter="Notifications"
+                    AutomationProperties.Name="View Notifications"
+                    AutomationProperties.HelpText="View pending health &amp; breeding reminders">
+                <Grid>
+                    <Path Width="18" Height="18" Stretch="Uniform" Fill="{DynamicResource TextSecondary}"
+                          Data="M12 22C13.1 22 14 21.1 14 20H10C10 21.1 10.9 22 12 22M18 16V11C18 7.93 16.36 5.36 13.5 4.68V4C13.5 3.17 12.83 2.5 12 2.5C11.17 2.5 10.5 3.17 10.5 4V4.68C7.63 5.36 6 7.92 6 11V16L4 18V19H20V18L18 16Z"/>
+                    <!-- Active Alert Dot if unread > 0 -->
+                    <Border Width="8" Height="8" CornerRadius="4" Background="{DynamicResource Accent}"
+                            HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-1,-1,0">
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Farm.Unread}" Value="0">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                    </Border>
+                </Grid>
+            </Button>
+
+        </StackPanel>
+    </Grid>
+</UserControl>
