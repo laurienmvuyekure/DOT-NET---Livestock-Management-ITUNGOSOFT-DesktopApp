@@ -1,0 +1,20 @@
+<Window x:Class="ItungoSoft.Farmer.Views.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ITUNGOSOFT - Farmer Login" Width="380" Height="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <StackPanel Margin="24" VerticalAlignment="Center">
+        <TextBlock Text="ITUNGOSOFT" FontSize="26" FontWeight="Bold" Foreground="#2E7D32"/>
+        <TextBlock Text="Farmer Module" Margin="0,0,0,16" Foreground="Gray"/>
+        <TextBlock Text="Full name (registration only)"/>
+        <TextBox x:Name="NameBox" Margin="0,2,0,8"/>
+        <TextBlock Text="Username"/>
+        <TextBox x:Name="UserBox" Margin="0,2,0,8"/>
+        <TextBlock Text="Password"/>
+        <PasswordBox x:Name="PassBox" Margin="0,2,0,8"/>
+        <TextBlock x:Name="Msg" Foreground="Firebrick" TextWrapping="Wrap" Height="34"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Register" Width="90" Margin="0,0,8,0" Click="Register_Click"/>
+            <Button Content="Log in" Width="90" IsDefault="True" Click="Login_Click"/>
+        </StackPanel>
+    </StackPanel>
+</Window>
