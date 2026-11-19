@@ -2,75 +2,95 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Grid Margin="24,14,24,24" DataContext="{Binding Extras}">
+    <Grid Margin="20,12,20,16" DataContext="{Binding Extras}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="320"/>
+            <ColumnDefinition Width="360"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <!-- Left Column: Create Listing Form Card -->
-        <Border Grid.Column="0" Margin="0,0,16,0"
+        <!-- Left Column: Create Listing Form Card (Fitted, Zero Page Scrolling) -->
+        <Border Grid.Column="0" Margin="0,0,14,0"
                 Background="{DynamicResource Surface}"
                 BorderBrush="{DynamicResource BorderSubtle}"
-                BorderThickness="1" CornerRadius="16" Padding="20">
-            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-                <StackPanel>
-                    <TextBlock Text="Marketplace Listing"
-                               FontSize="16" FontWeight="Bold"
-                               Foreground="{DynamicResource TextPrimary}"
-                               Margin="0,0,0,14"/>
+                BorderThickness="1" CornerRadius="14" Padding="16,14">
+            <DockPanel>
 
-                    <!-- Animal -->
-                    <TextBlock Text="Animal for Sale *" FontSize="12" FontWeight="SemiBold"
-                               Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,4"/>
-                    <ComboBox ItemsSource="{Binding AnimalList}"
-                              DisplayMemberPath="EarTag"
-                              SelectedItem="{Binding ListAnimal}"
-                              Padding="8,6" Margin="0,0,0,12"/>
+                <!-- Header -->
+                <TextBlock DockPanel.Dock="Top" Text="Create Marketplace Listing"
+                           FontSize="15" FontWeight="Bold"
+                           Foreground="{DynamicResource TextPrimary}"
+                           Margin="0,0,0,10"/>
 
-                    <!-- Price (RWF) -->
-                    <TextBlock Text="Price (RWF) *" FontSize="12" FontWeight="SemiBold"
-                               Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,4"/>
-                    <TextBox Text="{Binding Price}" Margin="0,0,0,12"/>
-
-                    <!-- Description -->
-                    <TextBlock Text="Listing Description *" FontSize="12" FontWeight="SemiBold"
-                               Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,4"/>
-                    <TextBox Text="{Binding ListDescription}" Height="70"
-                             TextWrapping="Wrap" AcceptsReturn="True" Margin="0,0,0,16"/>
-
-                    <!-- Create Listing Button -->
+                <!-- Create Listing Button & Message Docked at Bottom -->
+                <StackPanel DockPanel.Dock="Bottom" Margin="0,10,0,0">
                     <Button Content="Create Marketplace Listing"
                             Command="{Binding AddListingCommand}"
                             Style="{StaticResource AccentButton}"
                             HorizontalAlignment="Stretch"
-                            Padding="0,10" Margin="0,0,0,14"/>
+                            Padding="0,8" Margin="0,0,0,6"/>
 
-                    <!-- Status Message -->
                     <TextBlock Text="{Binding Message}" Foreground="{DynamicResource Accent}"
-                               TextWrapping="Wrap" FontSize="12" FontWeight="SemiBold"/>
+                               TextWrapping="Wrap" FontSize="11" FontWeight="SemiBold"/>
                 </StackPanel>
-            </ScrollViewer>
+
+                <!-- Input Controls -->
+                <StackPanel>
+                    <!-- Row 1: Animal & Price (2-Column Grid) -->
+                    <Grid Margin="0,0,0,8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0" Margin="0,0,6,0">
+                            <TextBlock Text="Animal for Sale *" FontSize="11" FontWeight="SemiBold"
+                                       Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,3"/>
+                            <ComboBox ItemsSource="{Binding AnimalList}"
+                                      DisplayMemberPath="EarTag"
+                                      SelectedItem="{Binding ListAnimal}"
+                                      Padding="8,5"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1" Margin="6,0,0,0">
+                            <TextBlock Text="Price (RWF) *" FontSize="11" FontWeight="SemiBold"
+                                       Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,3"/>
+                            <TextBox Text="{Binding Price}" Padding="8,4"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- Row 2: Description -->
+                    <TextBlock Text="Listing Description *" FontSize="11" FontWeight="SemiBold"
+                               Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,3"/>
+                    <TextBox Text="{Binding ListDescription}" Height="56"
+                             TextWrapping="Wrap" AcceptsReturn="True" Padding="8,4" Margin="0,0,0,4"/>
+                </StackPanel>
+
+            </DockPanel>
         </Border>
 
-        <!-- Right Column: Listings DataGrid Card -->
+        <!-- Right Column: Listings DataGrid Card (Fills 100% Height) -->
         <Border Grid.Column="1"
                 Background="{DynamicResource Surface}"
                 BorderBrush="{DynamicResource BorderSubtle}"
-                BorderThickness="1" CornerRadius="16" Padding="20">
+                BorderThickness="1" CornerRadius="14" Padding="16,14">
             <DockPanel>
 
-                <!-- Top Bar: Action Buttons -->
-                <DockPanel DockPanel.Dock="Top" Margin="0,0,0,16">
-                    <StackPanel Orientation="Horizontal">
+                <!-- Top Bar: Action Buttons & Title -->
+                <DockPanel DockPanel.Dock="Top" Margin="0,0,0,12">
+                    <TextBlock Text="Published Marketplace Listings"
+                               FontSize="15" FontWeight="Bold"
+                               Foreground="{DynamicResource TextPrimary}"
+                               VerticalAlignment="Center"/>
+
+                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" HorizontalAlignment="Right">
                         <Button Content="Toggle Active / Inactive"
                                 Command="{Binding ToggleListingCommand}"
                                 Style="{StaticResource PillButton}"
-                                Padding="14,6" Margin="0,0,8,0"/>
+                                Padding="12,5" Margin="0,0,8,0"/>
                         <Button Content="Delete Selected"
                                 Command="{Binding DeleteListingCommand}"
                                 Style="{StaticResource DangerButton}"
-                                Padding="14,6"/>
+                                Padding="12,5"/>
                     </StackPanel>
                 </DockPanel>
 

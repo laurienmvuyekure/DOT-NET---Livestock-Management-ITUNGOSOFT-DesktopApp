@@ -6,15 +6,14 @@
              AutomationProperties.Name="Hero Feature Carousel"
              AutomationProperties.LiveSetting="Polite">
 
-    <Grid x:Name="RootHeroContainer" Margin="24,14,24,14">
-
-        <!-- Outer Rounded Banner Surface with Gradient & Border -->
+    <Grid x:Name="RootHeroContainer" Margin="20,6,20,6">
+        <!-- Sleek Executive Banner Surface -->
         <Border Background="{DynamicResource HeroGradientBrush}"
                 BorderBrush="{DynamicResource HeroBorderBrush}"
                 BorderThickness="1"
-                CornerRadius="18"
+                CornerRadius="14"
                 ClipToBounds="True"
-                Padding="32,28">
+                Padding="20,12">
 
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -22,74 +21,58 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <!-- Left Column: Carousel Slide Content (Title, Description, CTA, Controls) -->
-                <Grid Grid.Column="0" VerticalAlignment="Center">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
+                <!-- Left Column: Carousel Slide Content -->
+                <StackPanel x:Name="SlideContentPanel" Grid.Column="0" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                    <StackPanel.RenderTransform>
+                        <TranslateTransform X="0" Y="0"/>
+                    </StackPanel.RenderTransform>
 
-                    <!-- Category Pill Tag -->
-                    <Border Grid.Row="0" HorizontalAlignment="Left" Background="{DynamicResource BorderSubtle}"
-                            CornerRadius="12" Padding="10,3" Margin="0,0,0,10">
-                        <TextBlock Text="{Binding CurrentSlide.Category}" FontSize="10" FontWeight="Bold"
-                                   Foreground="{DynamicResource Accent}"/>
-                    </Border>
-
-                    <!-- Slide Content Container with RenderTransform for Slide Animation -->
-                    <StackPanel x:Name="SlideContentPanel" Grid.Row="1" RenderTransformOrigin="0,0.5">
-                        <StackPanel.RenderTransform>
-                            <TranslateTransform x:Name="SlideTranslate" X="0"/>
-                        </StackPanel.RenderTransform>
-
-                        <!-- Main Title -->
+                    <!-- Line 1: Category Pill & Main Headline -->
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
+                        <Border Background="{DynamicResource BorderSubtle}"
+                                CornerRadius="8" Padding="8,2" Margin="0,0,10,0" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding CurrentSlide.Category}" FontSize="10" FontWeight="Bold"
+                                       Foreground="{DynamicResource Accent}"/>
+                        </Border>
                         <TextBlock Text="{Binding CurrentSlide.Title}"
-                                   FontSize="22" FontWeight="Bold"
+                                   FontSize="15" FontWeight="Bold"
                                    Foreground="{DynamicResource TextPrimary}"
-                                   TextWrapping="Wrap"
-                                   Margin="0,0,24,10"
-                                   AutomationProperties.Name="Featured Banner Headline"/>
-
-                        <!-- Subtitle Description Paragraph -->
-                        <TextBlock Text="{Binding CurrentSlide.Description}"
-                                   FontSize="13" LineHeight="20"
-                                   Foreground="{DynamicResource TextSecondary}"
-                                   TextWrapping="Wrap"
-                                   Margin="0,0,32,18"
-                                   MaxWidth="580"
-                                   HorizontalAlignment="Left"/>
+                                   VerticalAlignment="Center"
+                                   TextTrimming="CharacterEllipsis"/>
                     </StackPanel>
 
-                    <!-- Action Button & Play Trigger -->
-                    <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,0,0,20">
+                    <!-- Line 2: Description -->
+                    <TextBlock Text="{Binding CurrentSlide.Description}"
+                               FontSize="12"
+                               Foreground="{DynamicResource TextSecondary}"
+                               TextTrimming="CharacterEllipsis"
+                               Margin="0,0,16,8"/>
+
+                    <!-- Line 3: Controls (CTA Button, Arrows, Dots, Slide Counter) -->
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <!-- Action CTA Button -->
                         <Button Style="{StaticResource AccentButton}"
                                 Command="{Binding CurrentSlide.ActionCommand}"
-                                AutomationProperties.Name="{Binding CurrentSlide.ButtonText}">
+                                AutomationProperties.Name="{Binding CurrentSlide.ButtonText}"
+                                Padding="12,5" Margin="0,0,14,0">
                             <StackPanel Orientation="Horizontal">
-                                <Path Width="12" Height="12" Stretch="Uniform" Fill="#FFFFFF" Margin="0,0,8,0"
+                                <Path Width="10" Height="10" Stretch="Uniform" Fill="#FFFFFF" Margin="0,0,6,0"
                                       Data="M8 5V19L19 12L8 5Z"/>
-                                <TextBlock Text="{Binding CurrentSlide.ButtonText}" FontWeight="SemiBold"/>
+                                <TextBlock Text="{Binding CurrentSlide.ButtonText}" FontSize="11" FontWeight="SemiBold"/>
                             </StackPanel>
                         </Button>
-                    </StackPanel>
-
-                    <!-- Slider Controls: Prev, Next Arrows & Indicators -->
-                    <StackPanel Grid.Row="3" Orientation="Horizontal" VerticalAlignment="Center">
 
                         <!-- Prev Button -->
                         <Button Style="{StaticResource IconButton}"
                                 Command="{Binding PrevCommand}"
                                 AutomationProperties.Name="Previous Slide"
-                                Width="30" Height="30" Margin="0,0,8,0">
-                            <Path Width="12" Height="12" Stretch="Uniform" Fill="{DynamicResource TextSecondary}"
+                                Width="26" Height="26" Padding="0" Margin="0,0,4,0">
+                            <Path Width="10" Height="10" Stretch="Uniform" Fill="{DynamicResource TextSecondary}"
                                   Data="M15.41 7.41L14 6L8 12L14 18L15.41 16.59L10.83 12L15.41 7.41Z"/>
                         </Button>
 
                         <!-- Dot Indicators -->
-                        <ItemsControl ItemsSource="{Binding Slides}" VerticalAlignment="Center" Margin="0,0,8,0">
+                        <ItemsControl ItemsSource="{Binding Slides}" VerticalAlignment="Center" Margin="0,0,4,0">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <StackPanel Orientation="Horizontal"/>
@@ -100,11 +83,11 @@
                                     <Button Command="{Binding DataContext.SelectSlideCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                             CommandParameter="{Binding Index}"
                                             AutomationProperties.Name="{Binding Title, StringFormat='Switch to slide {0}'}"
-                                            Margin="3,0" Width="10" Height="10" Padding="0"
+                                            Margin="3,0" Width="8" Height="8" Padding="0"
                                             Background="Transparent" BorderThickness="0" Cursor="Hand">
                                         <Button.Template>
                                             <ControlTemplate TargetType="Button">
-                                                <Ellipse x:Name="Dot" Width="8" Height="8" Fill="{DynamicResource Border}"/>
+                                                <Ellipse x:Name="Dot" Width="6" Height="6" Fill="{DynamicResource Border}"/>
                                                 <ControlTemplate.Triggers>
                                                     <Trigger Property="IsMouseOver" Value="True">
                                                         <Setter TargetName="Dot" Property="Fill" Value="{DynamicResource Accent}"/>
@@ -121,85 +104,36 @@
                         <Button Style="{StaticResource IconButton}"
                                 Command="{Binding NextCommand}"
                                 AutomationProperties.Name="Next Slide"
-                                Width="30" Height="30" Margin="0,0,16,0">
-                            <Path Width="12" Height="12" Stretch="Uniform" Fill="{DynamicResource TextSecondary}"
+                                Width="26" Height="26" Padding="0" Margin="0,0,10,0">
+                            <Path Width="10" Height="10" Stretch="Uniform" Fill="{DynamicResource TextSecondary}"
                                   Data="M10 6L8.59 7.41L13.17 12L8.59 16.59L10 18L16 12L10 6Z"/>
                         </Button>
 
-                        <!-- Slide Index Counter Display (e.g. Slide 1 of 4) -->
-                        <TextBlock Text="{Binding SlideNumberDisplay}" FontSize="11" Foreground="{DynamicResource TextMuted}" VerticalAlignment="Center"/>
+                        <!-- Slide Counter -->
+                        <TextBlock Text="{Binding SlideNumberDisplay}" FontSize="11"
+                                   Foreground="{DynamicResource TextMuted}" VerticalAlignment="Center"/>
                     </StackPanel>
 
                     <!-- Hidden Screen Reader Live Announcement -->
-                    <TextBlock Grid.Row="4" Text="{Binding Announcement}"
-                               Visibility="Collapsed"
+                    <TextBlock Text="{Binding Announcement}" Visibility="Collapsed"
                                AutomationProperties.LiveSetting="Polite"/>
-                </Grid>
+                </StackPanel>
 
-                <!-- Right Column: Cluster of Round Dark Badges with Generic AI Icons -->
-                <Grid Grid.Column="1" Width="200" Height="170" VerticalAlignment="Center" Margin="10,0,0,0">
-
-                    <!-- Center Glow Radial Backdrop -->
-                    <Ellipse Width="150" Height="150" Fill="{DynamicResource Accent}" Opacity="0.12"
-                             HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
-                    <!-- Badge 1: Central Brain / Neural Core (Largest) -->
-                    <Border Width="64" Height="64" CornerRadius="32"
-                            Background="{DynamicResource SurfaceSecondary}"
-                            BorderBrush="{DynamicResource Accent}"
-                            BorderThickness="1.5"
-                            HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <Border.Effect>
-                            <DropShadowEffect Color="#3B82F6" BlurRadius="20" ShadowDepth="0" Opacity="0.35"/>
-                        </Border.Effect>
-                        <Path Width="28" Height="28" Stretch="Uniform" Fill="{DynamicResource Accent}"
-                              Data="M12 2A2 2 0 0 1 14 4C14 4.74 13.6 5.39 13 5.73V7H14A7 7 0 0 1 21 14H22A1 1 0 0 1 23 15V18A1 1 0 0 1 22 19H21V20A2 2 0 0 1 19 22H5A2 2 0 0 1 3 20V19H2A1 1 0 0 1 1 18V15A1 1 0 0 1 2 14H3A7 7 0 0 1 10 7H11V5.73C10.4 5.39 10 4.74 10 4A2 2 0 0 1 12 2Z"/>
-                    </Border>
-
-                    <!-- Badge 2: Top Right Sparkle / Magic -->
-                    <Border Width="42" Height="42" CornerRadius="21"
-                            Background="{DynamicResource SurfaceSecondary}"
-                            BorderBrush="{DynamicResource Border}"
-                            BorderThickness="1"
-                            HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,12,0">
-                        <Path Width="18" Height="18" Stretch="Uniform" Fill="{DynamicResource CardYellowText}"
-                              Data="M7.5 5.6L5 7L6.4 4.5L5 2L7.5 3.4L10 2L8.6 4.5L10 7L7.5 5.6M14 8L16.2 13.2L21.4 15.4L16.2 17.6L14 22.8L11.8 17.6L6.6 15.4L11.8 13.2L14 8Z"/>
-                    </Border>
-
-                    <!-- Badge 3: Top Left Microchip / Logic -->
-                    <Border Width="38" Height="38" CornerRadius="19"
-                            Background="{DynamicResource SurfaceSecondary}"
-                            BorderBrush="{DynamicResource Border}"
-                            BorderThickness="1"
-                            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,18,0,0">
-                        <Path Width="16" Height="16" Stretch="Uniform" Fill="{DynamicResource CardGreenText}"
-                              Data="M6 4H18V5H20V7H21V9H22V15H21V17H20V19H18V20H6V19H4V17H3V15H2V9H3V7H4V5H6V4M11 11H7V13H11V11M17 11H13V13H17V11Z"/>
-                    </Border>
-
-                    <!-- Badge 4: Bottom Right Network Node Branch -->
-                    <Border Width="40" Height="40" CornerRadius="20"
-                            Background="{DynamicResource SurfaceSecondary}"
-                            BorderBrush="{DynamicResource Border}"
-                            BorderThickness="1"
-                            HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,16,12">
-                        <Path Width="16" Height="16" Stretch="Uniform" Fill="{DynamicResource CardLavenderText}"
-                              Data="M19 15A3 3 0 0 1 16 18A3 3 0 0 1 13 15C13 14.15 13.35 13.38 13.92 12.83L10.82 8.7C10.56 8.89 10.29 9 10 9A3 3 0 0 1 7 6A3 3 0 0 1 10 3A3 3 0 0 1 13 6C13 6.85 12.65 7.62 12.08 8.17L15.18 12.3C15.44 12.11 15.71 12 16 12A3 3 0 0 1 19 15Z"/>
-                    </Border>
-
-                    <!-- Badge 5: Bottom Left Shield / Trust -->
-                    <Border Width="36" Height="36" CornerRadius="18"
-                            Background="{DynamicResource SurfaceSecondary}"
-                            BorderBrush="{DynamicResource Border}"
-                            BorderThickness="1"
-                            HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="22,0,0,8">
-                        <Path Width="15" Height="15" Stretch="Uniform" Fill="{DynamicResource CardBlueText}"
-                              Data="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1M12 11.99H19C18.47 16.11 15.72 19.78 12 20.93V12H5V6.3L12 3.19V11.99Z"/>
-                    </Border>
-
-                </Grid>
+                <!-- Right Column: Single Crisp Shield Badge -->
+                <Border Grid.Column="1" Width="52" Height="52" CornerRadius="26"
+                        Background="{DynamicResource SurfaceSecondary}"
+                        BorderBrush="{DynamicResource Accent}"
+                        BorderThickness="1.5"
+                        VerticalAlignment="Center" Margin="10,0,4,0">
+                    <Border.Effect>
+                        <DropShadowEffect Color="#3B82F6" BlurRadius="14" ShadowDepth="0" Opacity="0.3"/>
+                    </Border.Effect>
+                    <!-- Farm Shield Icon -->
+                    <Path Width="24" Height="24" Stretch="Uniform" Fill="{DynamicResource Accent}"
+                          Data="M12 2L4 6V12C4 16.5 7.5 20.5 12 22C16.5 20.5 20 16.5 20 12V6L12 2M12 4.2L18 7.2V11.8C18 15.2 15.5 18.3 12 19.8C8.5 18.3 6 15.2 6 11.8V7.2L12 4.2M12 7A3 3 0 0 0 9 10C9 11.3 9.8 12.4 11 12.8V16H13V12.8C14.2 12.4 15 11.3 15 10A3 3 0 0 0 12 7Z"/>
+                </Border>
 
             </Grid>
         </Border>
-
     </Grid>
 </UserControl>

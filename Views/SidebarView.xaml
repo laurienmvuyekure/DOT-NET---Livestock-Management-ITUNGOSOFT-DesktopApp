@@ -4,44 +4,44 @@
              Width="230"
              Background="{DynamicResource Surface}">
 
-    <DockPanel Margin="16,18,16,16">
+    <DockPanel Margin="12,12,12,12">
 
         <!-- Logo & App Brand Header -->
-        <DockPanel DockPanel.Dock="Top" Margin="4,0,0,20">
-            <Border Width="34" Height="34" CornerRadius="10" Background="{DynamicResource Accent}"
-                    Margin="0,0,12,0" HorizontalAlignment="Left">
+        <DockPanel DockPanel.Dock="Top" Margin="4,0,0,12">
+            <Border Width="32" Height="32" CornerRadius="8" Background="{DynamicResource Accent}"
+                    Margin="0,0,10,0" HorizontalAlignment="Left">
                 <!-- Agricultural Shield / Farm Vector Icon -->
-                <Path Width="18" Height="18" Stretch="Uniform" Fill="#FFFFFF"
+                <Path Width="16" Height="16" Stretch="Uniform" Fill="#FFFFFF"
                       Data="M12 2L4 6V12C4 16.5 7.5 20.5 12 22C16.5 20.5 20 16.5 20 12V6L12 2M12 4.2L18 7.2V11.8C18 15.2 15.5 18.3 12 19.8C8.5 18.3 6 15.2 6 11.8V7.2L12 4.2M12 7A3 3 0 0 0 9 10C9 11.3 9.8 12.4 11 12.8V16H13V12.8C14.2 12.4 15 11.3 15 10A3 3 0 0 0 12 7Z"/>
             </Border>
             <StackPanel VerticalAlignment="Center">
-                <TextBlock Text="ITUNGOSOFT" FontSize="17" FontWeight="Bold" Foreground="{DynamicResource TextPrimary}"/>
-                <TextBlock Text="Farmer Module" FontSize="11" Foreground="{DynamicResource TextMuted}"/>
+                <TextBlock Text="ITUNGOSOFT" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource TextPrimary}"/>
+                <TextBlock Text="Farmer Module" FontSize="10" Foreground="{DynamicResource TextMuted}"/>
             </StackPanel>
         </DockPanel>
 
         <!-- User Profile & Sign Out (Docked at Bottom) -->
-        <StackPanel DockPanel.Dock="Bottom" Margin="0,14,0,0">
-            <Separator Background="{DynamicResource BorderSubtle}" Margin="0,0,0,12"/>
+        <StackPanel DockPanel.Dock="Bottom" Margin="0,10,0,0">
+            <Separator Background="{DynamicResource BorderSubtle}" Margin="0,0,0,8"/>
 
             <!-- Real Farmer Avatar & Credentials -->
-            <Grid Margin="0,0,0,12">
+            <Grid Margin="0,0,0,8">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Border Grid.Column="0" Width="36" Height="36" CornerRadius="18"
+                <Border Grid.Column="0" Width="32" Height="32" CornerRadius="16"
                         Background="{DynamicResource CardLavender}" BorderBrush="{DynamicResource Border}"
-                        BorderThickness="1" Margin="0,0,10,0">
+                        BorderThickness="1" Margin="0,0,8,0">
                     <TextBlock Text="{Binding UserInitials}" HorizontalAlignment="Center" VerticalAlignment="Center"
-                               FontWeight="Bold" FontSize="13" Foreground="{DynamicResource CardLavenderText}"/>
+                               FontWeight="Bold" FontSize="12" Foreground="{DynamicResource CardLavenderText}"/>
                 </Border>
 
                 <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                    <TextBlock Text="{Binding UserName}" FontWeight="SemiBold" FontSize="13" Foreground="{DynamicResource TextPrimary}"
+                    <TextBlock Text="{Binding UserName}" FontWeight="SemiBold" FontSize="12" Foreground="{DynamicResource TextPrimary}"
                                TextTrimming="CharacterEllipsis"/>
-                    <TextBlock Text="{Binding UserEmail}" FontSize="11" Foreground="{DynamicResource TextMuted}"
+                    <TextBlock Text="{Binding UserEmail}" FontSize="10" Foreground="{DynamicResource TextMuted}"
                                TextTrimming="CharacterEllipsis"/>
                 </StackPanel>
             </Grid>
@@ -51,21 +51,21 @@
                     Command="{Binding SignOutCommand}"
                     AutomationProperties.Name="Sign Out of ITUNGOSOFT"
                     HorizontalAlignment="Stretch"
-                    Padding="12,8">
+                    Padding="10,6">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Path Width="14" Height="14" Stretch="Uniform" Fill="{DynamicResource SignOutFg}" Margin="0,0,8,0"
+                    <Path Width="13" Height="13" Stretch="Uniform" Fill="{DynamicResource SignOutFg}" Margin="0,0,6,0"
                           Data="M16 17V14H9V10H16V7L21 12L16 17M14 2A2 2 0 0 1 16 4V6H14V4H5V20H14V18H16V20A2 2 0 0 1 14 22H5A2 2 0 0 1 3 20V4A2 2 0 0 1 5 2H14Z"/>
-                    <TextBlock Text="Sign Out" FontWeight="SemiBold"/>
+                    <TextBlock Text="Sign Out" FontWeight="SemiBold" FontSize="12"/>
                 </StackPanel>
             </Button>
         </StackPanel>
 
-        <!-- Sidebar Navigation Sections (Scrollable) -->
+        <!-- Sidebar Navigation Sections (Snug fit, Zero Scrolling) -->
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
             <StackPanel>
 
                 <!-- SECTION 1: GENERAL -->
-                <TextBlock Text="GENERAL" FontSize="11" FontWeight="Bold" Foreground="{DynamicResource TextMuted}" Margin="10,0,0,6"/>
+                <TextBlock Text="GENERAL" FontSize="10" FontWeight="Bold" Foreground="{DynamicResource TextMuted}" Margin="8,0,0,4"/>
 
                 <!-- 1. Dashboard -->
                 <Button Command="{Binding NavigateCommand}" CommandParameter="Dashboard"
@@ -80,7 +80,7 @@
                         </Style>
                     </Button.Style>
                     <StackPanel Orientation="Horizontal">
-                        <Path Width="16" Height="16" Stretch="Uniform" Fill="{DynamicResource TextSecondary}" Margin="0,0,10,0"
+                        <Path Width="15" Height="15" Stretch="Uniform" Fill="{DynamicResource TextSecondary}" Margin="0,0,8,0"
                               Data="M3 13H11V3H3V13M3 21H11V15H3V21M13 21H21V11H13V21M13 3V9H21V3H13Z"/>
                         <TextBlock Text="Dashboard"/>
                     </StackPanel>
@@ -100,7 +100,7 @@
                     </Button.Style>
                     <StackPanel Orientation="Horizontal">
                         <!-- Cow / Animal Vector Icon -->
-                        <Path Width="16" Height="16" Stretch="Uniform" Fill="{DynamicResource TextSecondary}" Margin="0,0,10,0"
+                        <Path Width="15" Height="15" Stretch="Uniform" Fill="{DynamicResource TextSecondary}" Margin="0,0,8,0"
                               Data="M19 13C19 14.1 18.1 15 17 15H15V19H13V15H11V19H9V15H7C5.9 15 5 14.1 5 13V9C5 7.9 5.9 7 7 7H17C18.1 7 19 7.9 19 9V13M7 9V13H17V9H7M5 4L2 7H4V13H2V15H4V19H2V21H7V19H5V15H7V13H5V7H7L5 4M19 4L17 7H19V13H17V15H19V19H17V21H22V19H20V15H22V13H20V7H22L19 4Z"/>
                         <TextBlock Text="Animals"/>
                     </StackPanel>
@@ -120,7 +120,7 @@
                     </Button.Style>
                     <StackPanel Orientation="Horizontal">
                         <!-- Medical Cross / Health Vector Icon -->
-                        <Path Width="16" Height="16" Stretch="Uniform" Fill="{DynamicResource TextSecondary}" Margin="0,0,10,0"
+                        <Path Width="15" Height="15" Stretch="Uniform" Fill="{DynamicResource TextSecondary}" Margin="0,0,8,0"
                               Data="M19 10.5H13.5V5H10.5V10.5H5V13.5H10.5V19H13.5V13.5H19V10.5Z"/>
                         <TextBlock Text="Health"/>
                     </StackPanel>
@@ -140,14 +140,14 @@
                     </Button.Style>
                     <StackPanel Orientation="Horizontal">
                         <!-- Heart / Reproduction Vector Icon -->
-                        <Path Width="16" Height="16" Stretch="Uniform" Fill="{DynamicResource TextSecondary}" Margin="0,0,10,0"
+                        <Path Width="15" Height="15" Stretch="Uniform" Fill="{DynamicResource TextSecondary}" Margin="0,0,8,0"
                               Data="M12 21.35L10.55 20.03C5.4 15.36 2 12.27 2 8.5C2 5.41 4.42 3 7.5 3C9.24 3 10.91 3.81 12 5.08C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.41 22 8.5C22 12.27 18.6 15.36 13.45 20.03L12 21.35Z"/>
                         <TextBlock Text="Breeding"/>
                     </StackPanel>
                 </Button>
 
                 <!-- SECTION 2: SERVICES & TOOLS -->
-                <TextBlock Text="SERVICES &amp; TOOLS" FontSize="11" FontWeight="Bold" Foreground="{DynamicResource TextMuted}" Margin="10,16,0,6"/>
+                <TextBlock Text="SERVICES &amp; TOOLS" FontSize="10" FontWeight="Bold" Foreground="{DynamicResource TextMuted}" Margin="8,8,0,4"/>
 
                 <!-- 5. Consultations -->
                 <Button Command="{Binding NavigateCommand}" CommandParameter="Consultations"
@@ -162,7 +162,7 @@
                         </Style>
                     </Button.Style>
                     <StackPanel Orientation="Horizontal">
-                        <Path Width="16" Height="16" Stretch="Uniform" Fill="{DynamicResource TextSecondary}" Margin="0,0,10,0"
+                        <Path Width="15" Height="15" Stretch="Uniform" Fill="{DynamicResource TextSecondary}" Margin="0,0,8,0"
                               Data="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2M20 16H6L4 18V4H20V16Z"/>
                         <TextBlock Text="Consultations"/>
                     </StackPanel>
@@ -182,7 +182,7 @@
                     </Button.Style>
                     <StackPanel Orientation="Horizontal">
                         <!-- Tag / Marketplace Vector Icon -->
-                        <Path Width="16" Height="16" Stretch="Uniform" Fill="{DynamicResource TextSecondary}" Margin="0,0,10,0"
+                        <Path Width="15" Height="15" Stretch="Uniform" Fill="{DynamicResource TextSecondary}" Margin="0,0,8,0"
                               Data="M21.41 11.58L12.41 2.58C12.05 2.22 11.55 2 11 2H4C2.9 2 2 2.9 2 4V11C2 11.55 2.22 12.05 2.59 12.42L11.59 21.42C11.95 21.78 12.45 22 13 22C13.55 22 14.05 21.78 14.41 21.41L21.41 14.41C21.78 14.05 22 13.55 22 13C22 12.45 21.77 11.94 21.41 11.58M5.5 7C4.67 7 4 6.33 4 5.5C4 4.67 4.67 4 5.5 4C6.33 4 7 4.67 7 5.5C7 6.33 6.33 7 5.5 7Z"/>
                         <TextBlock Text="Listings"/>
                     </StackPanel>
@@ -201,16 +201,16 @@
                         </Style>
                     </Button.Style>
                     <StackPanel Orientation="Horizontal">
-                        <Path Width="16" Height="16" Stretch="Uniform" Fill="{DynamicResource TextSecondary}" Margin="0,0,10,0"
+                        <Path Width="15" Height="15" Stretch="Uniform" Fill="{DynamicResource TextSecondary}" Margin="0,0,8,0"
                               Data="M14 2H6A2 2 0 0 0 4 4V20A2 2 0 0 0 6 22H18A2 2 0 0 0 20 20V8L14 2M13 3.5L18.5 9H13V3.5Z"/>
                         <TextBlock Text="Reports &amp; Data"/>
                     </StackPanel>
                 </Button>
 
                 <!-- SECTION 3: SETTINGS & ALERTS -->
-                <TextBlock Text="SETTINGS &amp; ALERTS" FontSize="11" FontWeight="Bold" Foreground="{DynamicResource TextMuted}" Margin="10,16,0,6"/>
+                <TextBlock Text="SETTINGS &amp; ALERTS" FontSize="10" FontWeight="Bold" Foreground="{DynamicResource TextMuted}" Margin="8,8,0,4"/>
 
-                <!-- 8. Notifications (with Live Unread Badge from Database!) -->
+                <!-- 8. Notifications -->
                 <Button Command="{Binding NavigateCommand}" CommandParameter="Notifications"
                         AutomationProperties.Name="Notifications &amp; Reminders">
                     <Button.Style>
@@ -224,7 +224,7 @@
                     </Button.Style>
                     <DockPanel LastChildFill="True">
                         <!-- Unread Count Badge (Live from Database) -->
-                        <Border DockPanel.Dock="Right" Background="{DynamicResource Accent}" CornerRadius="9" Padding="6,1"
+                        <Border DockPanel.Dock="Right" Background="{DynamicResource Accent}" CornerRadius="8" Padding="5,1"
                                 Margin="4,0,0,0">
                             <Border.Style>
                                 <Style TargetType="Border">
@@ -239,11 +239,11 @@
                                     </Style.Triggers>
                                 </Style>
                             </Border.Style>
-                            <TextBlock Text="{Binding Farm.Unread}" FontSize="10" FontWeight="Bold" Foreground="#FFFFFF"/>
+                            <TextBlock Text="{Binding Farm.Unread}" FontSize="9" FontWeight="Bold" Foreground="#FFFFFF"/>
                         </Border>
 
                         <StackPanel Orientation="Horizontal">
-                            <Path Width="16" Height="16" Stretch="Uniform" Fill="{DynamicResource TextSecondary}" Margin="0,0,10,0"
+                            <Path Width="15" Height="15" Stretch="Uniform" Fill="{DynamicResource TextSecondary}" Margin="0,0,8,0"
                                   Data="M12 22C13.1 22 14 21.1 14 20H10C10 21.1 10.9 22 12 22M18 16V11C18 7.93 16.36 5.36 13.5 4.68V4C13.5 3.17 12.83 2.5 12 2.5C11.17 2.5 10.5 3.17 10.5 4V4.68C7.63 5.36 6 7.92 6 11V16L4 18V19H20V18L18 16Z"/>
                             <TextBlock Text="Notifications"/>
                         </StackPanel>
@@ -251,16 +251,16 @@
                 </Button>
 
                 <!-- 9. Dark Mode Toggle Switch -->
-                <Grid Margin="12,4,4,4">
+                <Grid Margin="10,3,4,3">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
                     <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
-                        <Path Width="16" Height="16" Stretch="Uniform" Fill="{DynamicResource TextSecondary}" Margin="0,0,10,0"
+                        <Path Width="15" Height="15" Stretch="Uniform" Fill="{DynamicResource TextSecondary}" Margin="0,0,8,0"
                               Data="M12 2A10 10 0 0 0 2 12A10 10 0 0 0 12 22A10 10 0 0 0 22 12A10 10 0 0 0 12 2M12 4V20A8 8 0 0 1 12 4Z"/>
-                        <TextBlock Text="Dark Mode" VerticalAlignment="Center" FontSize="13" Foreground="{DynamicResource TextSecondary}"/>
+                        <TextBlock Text="Dark Mode" VerticalAlignment="Center" FontSize="12" Foreground="{DynamicResource TextSecondary}"/>
                     </StackPanel>
 
                     <CheckBox Grid.Column="1"
@@ -283,7 +283,7 @@
                         </Style>
                     </Button.Style>
                     <StackPanel Orientation="Horizontal">
-                        <Path Width="16" Height="16" Stretch="Uniform" Fill="{DynamicResource TextSecondary}" Margin="0,0,10,0"
+                        <Path Width="15" Height="15" Stretch="Uniform" Fill="{DynamicResource TextSecondary}" Margin="0,0,8,0"
                               Data="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12M12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14Z"/>
                         <TextBlock Text="Profile"/>
                     </StackPanel>

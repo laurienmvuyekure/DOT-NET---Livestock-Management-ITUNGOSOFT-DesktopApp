@@ -2,89 +2,113 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Grid Margin="24,14,24,24" DataContext="{Binding Farm}">
+    <Grid Margin="20,12,20,16" DataContext="{Binding Farm}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="320"/>
+            <ColumnDefinition Width="360"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <!-- Left Column: Mating Form & Birth Outcome Card -->
-        <Border Grid.Column="0" Margin="0,0,16,0"
+        <!-- Left Column: Mating Form & Birth Outcome Card (Fitted, Zero Page Scrolling) -->
+        <Border Grid.Column="0" Margin="0,0,14,0"
                 Background="{DynamicResource Surface}"
                 BorderBrush="{DynamicResource BorderSubtle}"
-                BorderThickness="1" CornerRadius="16" Padding="20">
-            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                BorderThickness="1" CornerRadius="14" Padding="16,14">
+            <DockPanel>
+
+                <!-- Header -->
+                <TextBlock DockPanel.Dock="Top" Text="Breeding &amp; Gestation Management"
+                           FontSize="15" FontWeight="Bold"
+                           Foreground="{DynamicResource TextPrimary}"
+                           Margin="0,0,0,10"/>
+
+                <!-- Status Message Docked at Bottom -->
+                <TextBlock DockPanel.Dock="Bottom" Text="{Binding Message}" Foreground="{DynamicResource Accent}"
+                           TextWrapping="Wrap" FontSize="11" FontWeight="SemiBold" Margin="0,6,0,0"/>
+
+                <!-- Form Inputs -->
                 <StackPanel>
-                    <TextBlock Text="Breeding &amp; Reproduction"
-                               FontSize="16" FontWeight="Bold"
-                               Foreground="{DynamicResource TextPrimary}"
-                               Margin="0,0,0,14"/>
+                    <!-- Row 1: Dam & Sire -->
+                    <Grid Margin="0,0,0,8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Margin="0,0,6,0">
+                            <TextBlock Text="Female (Dam) *" FontSize="11" FontWeight="SemiBold"
+                                       Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,3"/>
+                            <ComboBox ItemsSource="{Binding AnimalList}"
+                                      DisplayMemberPath="EarTag"
+                                      SelectedItem="{Binding Dam}"
+                                      Padding="8,5"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Margin="6,0,0,0">
+                            <TextBlock Text="Male Sire (Tag) *" FontSize="11" FontWeight="SemiBold"
+                                       Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,3"/>
+                            <TextBox Text="{Binding Sire}" Padding="8,4"/>
+                        </StackPanel>
+                    </Grid>
 
-                    <!-- Female Animal (Dam) -->
-                    <TextBlock Text="Female Animal (Dam) *" FontSize="12" FontWeight="SemiBold"
-                               Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,4"/>
-                    <ComboBox ItemsSource="{Binding AnimalList}"
-                              DisplayMemberPath="EarTag"
-                              SelectedItem="{Binding Dam}"
-                              Padding="8,6" Margin="0,0,0,12"/>
-
-                    <!-- Male Sire Ear Tag -->
-                    <TextBlock Text="Male Sire (Ear Tag) *" FontSize="12" FontWeight="SemiBold"
-                               Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,4"/>
-                    <TextBox Text="{Binding Sire}" Margin="0,0,0,12"/>
-
-                    <!-- Method -->
-                    <TextBlock Text="Breeding Method *" FontSize="12" FontWeight="SemiBold"
-                               Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,4"/>
-                    <ComboBox ItemsSource="{Binding Methods}"
-                              SelectedItem="{Binding Method}"
-                              Padding="8,6" Margin="0,0,0,12"/>
-
-                    <!-- Mating Date -->
-                    <TextBlock Text="Mating Date *" FontSize="12" FontWeight="SemiBold"
-                               Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,4"/>
-                    <DatePicker SelectedDate="{Binding MatingDate}" Margin="0,0,0,14"/>
+                    <!-- Row 2: Method & Mating Date -->
+                    <Grid Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Margin="0,0,6,0">
+                            <TextBlock Text="Method *" FontSize="11" FontWeight="SemiBold"
+                                       Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,3"/>
+                            <ComboBox ItemsSource="{Binding Methods}"
+                                      SelectedItem="{Binding Method}"
+                                      Padding="8,5"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Margin="6,0,0,0">
+                            <TextBlock Text="Mating Date *" FontSize="11" FontWeight="SemiBold"
+                                       Foreground="{DynamicResource TextSecondary}" Margin="0,0,0,3"/>
+                            <DatePicker SelectedDate="{Binding MatingDate}" Padding="8,4"/>
+                        </StackPanel>
+                    </Grid>
 
                     <!-- Save Mating Button -->
                     <Button Content="Save Mating Record"
                             Command="{Binding AddBreedingCommand}"
                             Style="{StaticResource AccentButton}"
                             HorizontalAlignment="Stretch"
-                            Padding="0,10" Margin="0,0,0,18"/>
-
-                    <Separator Background="{DynamicResource BorderSubtle}" Margin="0,0,0,14"/>
-
-                    <!-- Birth Outcome Section -->
-                    <TextBlock Text="Record Birth Outcome" FontSize="14" FontWeight="Bold"
-                               Foreground="{DynamicResource TextPrimary}" Margin="0,0,0,4"/>
-                    <TextBlock Text="Select a breeding record row first" FontSize="11"
-                               Foreground="{DynamicResource TextMuted}" Margin="0,0,0,8"/>
-
-                    <TextBox Text="{Binding Outcome}" Margin="0,0,0,10"
-                             ToolTip="e.g. 1 healthy male calf, Twins, etc."/>
-
-                    <Button Content="Record Birth Outcome"
-                            Command="{Binding RecordOutcomeCommand}"
-                            Style="{StaticResource PillButton}"
-                            HorizontalAlignment="Stretch"
                             Padding="0,8" Margin="0,0,0,12"/>
 
-                    <!-- Message -->
-                    <TextBlock Text="{Binding Message}" Foreground="{DynamicResource Accent}"
-                               TextWrapping="Wrap" FontSize="12" FontWeight="SemiBold"/>
+                    <Separator Background="{DynamicResource BorderSubtle}" Margin="0,0,0,10"/>
+
+                    <!-- Birth Outcome Section -->
+                    <TextBlock Text="Record Birth Outcome" FontSize="13" FontWeight="Bold"
+                               Foreground="{DynamicResource TextPrimary}" Margin="0,0,0,2"/>
+                    <TextBlock Text="Select a table row first" FontSize="10"
+                               Foreground="{DynamicResource TextMuted}" Margin="0,0,0,6"/>
+
+                    <Grid Margin="0,0,0,6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Grid.Column="0" Text="{Binding Outcome}" Padding="8,4" Margin="0,0,6,0"
+                                 ToolTip="e.g. 1 healthy male calf"/>
+                        <Button Grid.Column="1" Content="Record"
+                                Command="{Binding RecordOutcomeCommand}"
+                                Style="{StaticResource PillButton}"
+                                Padding="12,4"/>
+                    </Grid>
                 </StackPanel>
-            </ScrollViewer>
+
+            </DockPanel>
         </Border>
 
-        <!-- Right Column: Breeding DataGrid Card -->
+        <!-- Right Column: Breeding DataGrid Card (Fills 100% Height) -->
         <Border Grid.Column="1"
                 Background="{DynamicResource Surface}"
                 BorderBrush="{DynamicResource BorderSubtle}"
-                BorderThickness="1" CornerRadius="16" Padding="20">
+                BorderThickness="1" CornerRadius="14" Padding="16,14">
             <DockPanel>
                 <TextBlock DockPanel.Dock="Top" Text="Breeding &amp; Gestation Registry"
                            FontSize="15" FontWeight="Bold" Foreground="{DynamicResource TextPrimary}"
-                           Margin="0,0,0,16"/>
+                           Margin="0,0,0,12"/>
 
                 <DataGrid ItemsSource="{Binding Breeding}"
                           SelectedItem="{Binding SelectedBreeding}"
